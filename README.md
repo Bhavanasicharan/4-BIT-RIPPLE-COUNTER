@@ -1,16 +1,16 @@
 # 4-BIT-RIPPLE-COUNTER
 
-**AIM:**
+*AIM:*
 
 To implement  4 Bit Ripple Counter using verilog and validating their functionality using their functional tables
 
-**SOFTWARE REQUIRED:**
+*SOFTWARE REQUIRED:*
 
 Quartus prime
 
-**THEORY**
+*THEORY*
 
-**4 Bit Ripple Counter**
+*4 Bit Ripple Counter*
 
 A binary ripple counter consists of a series connection of complementing flip-flops (T or JK type), with the output of each flip-flop connected to the Clock Pulse input of the next higher-order flip-flop. The flip-flop holding the least significant bit receives the incoming count pulses. The diagram of a 4-bit binary ripple counter is shown in Fig. below.
 
@@ -22,57 +22,52 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 ![image](https://github.com/naavaneetha/4-BIT-RIPPLE-COUNTER/assets/154305477/85e1958a-2fc1-49bb-9a9f-d58ccbf3663c)
 
-**Procedure**
-1. Increment count on each positive edge of the clock
-2. Reset count to zero when it reaches 15
-3. Generate clock signal(clk)
-4. Instantinate functional testing by displaying the count at each clock cycle for 16 cycles
-5. Conduct functional testing by displaying the count at each clock cycle for 16 cycles.
-6. 
-**PROGRAM**
-module ripple (
-    input clk,     // Clock input
-    input reset,   // Reset input (active high)
-    output [3:0] q // 4-bit output
-);
-    // Internal signals for flip-flops
-    reg [3:0] q_int;
+*Procedure*
 
-    // Assign internal register to output
-    assign q = q_int;
 
-    always @(posedge clk or posedge reset) begin
-        if (reset) 
-            q_int[0] <= 1'b0; // Reset the first bit to 0
-        else 
-            q_int[0] <= ~q_int[0]; // Toggle the first bit on clock edge
-    end
+**1.Increment count on each positive edge of the clock. 
 
-    // Generate the other flip-flops based on the output of the previous one
-    genvar i;
-    generate
-        for (i = 1; i < 4; i = i + 1) begin : ripple
-            always @(posedge q_int[i-1] or posedge reset) begin
-                if (reset) 
-                    q_int[i] <= 1'b0; // Reset the bit to 0
-                else 
-                    q_int[i] <= ~q_int[i]; // Toggle the bit on clock edge of previous stage
-            end
-        end
-    endgenerate
+
+2.Reset count to zero when it reaches 15. 
+
+
+3.Generate clock signal (clk).
+
+
+4.Instantiate the RippleCounter module.
+
+
+5.Conduct functional testing by displaying the count at each clock cycle for 16 cycles.**
+
+
+*PROGRAM*
+
+Developed by:B Charan Reddy
+RegisterNumber:212224240026
+
+
+module EX12(clk, rst, count);
+input wire clk;
+input wire rst;
+output reg [3:0] count;
+
+always @(posedge clk or posedge rst)
+begin
+	if(rst)
+		count <= 4'b0000;
+	else
+		count <= count + 1;
+end
 endmodule
- Developed by: RegisterNumber: 24001573
 
 
-**RTL LOGIC FOR 4 Bit Ripple Counter**
+*RTL LOGIC FOR 4 Bit Ripple Counter*
 
-![image](https://github.com/user-attachments/assets/0a1eb1e3-65a9-4ea7-988f-12e3fd83253a)
+<img width="1919" height="1199" alt="Screenshot 2025-11-04 142234" src="https://github.com/user-attachments/assets/c2eb173d-543c-468e-8d38-934171045d08" />
 
+*TIMING DIGRAMS FOR 4 Bit Ripple Counter*
 
-**TIMING DIGRAMS FOR 4 Bit Ripple Counter**
+<img width="1916" height="1199" alt="Screenshot 2025-11-04 142624" src="https://github.com/user-attachments/assets/fe2c3099-2f04-4d3e-8f0a-0ec09a84ee9b" />
 
-![image](https://github.com/user-attachments/assets/0827bd20-166c-4763-a507-860aa4a0c0ef)
-
-
-**RESULTS**
-Thus, the Bit Ripple Counter is designed and its functionality is validated using the truth table and timing diagrams.
+*RESULTS:*
+Program executed successfully.
